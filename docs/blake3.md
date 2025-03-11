@@ -15,16 +15,30 @@ The Merkleized nature of Blake3 is crucial because it enables:
 - Incremental updates when only parts of a file change
 - Natural support for content-addressed systems where data is identified by its hash
 
+## How Iroh Uses Blake3
+
+Iroh is a content-addressed peer-to-peer data system that leverages Blake3's Merkleized structure:
+
+1. **Content Addressing**: When you add content to Iroh, it splits the data into chunks and creates Blake3 hashes for each chunk. These hashes serve as the unique identifiers for retrieving that content.
+
+2. **Data Verification**: The Blake3 hash structure allows peers to verify they've received the correct data by comparing computed hashes with expected ones.
+
+3. **Efficient Synchronization**: Iroh can determine exactly which chunks of a file are missing by comparing Merkle trees, making data synchronization highly efficient.
+
+4. **Immutable References**: The Blake3 hash of content serves as an immutable reference - if the content changes, its hash changes.
+
 ## Challenge Mechanism
 
 Our challenge mechanism built on Blake3 creates a foundation for trust in a decentralized storage network:
 
-1. **Challenge Format**: When a peer claims to be storing a file, other peers can challenge them to provide the a zk-proof over a random chunk of that file. 
-2. **Proof Generation**: The challenged peer must provide the chunk as well as the sibling hashes leading up from that chunk to the hash of that file. To respond correctly, the challenged peer must:
-   - Have the actual chunk
-   - And the candidate sibling hashes, which requires having seen and hashed the entire file.
+1. **Challenge Format**: When a peer claims to be storing a file, other peers can challenge them to provide the a zk-proof over a random chunk of that file. The challenged peer must provide the chunk as well as the sibling hashes leading up from that chunk to the hash of that file. challenging peers can verify that the returned chunk does in fact hash up to the specified root hash, forming a succint zk-proof that the challenged peer is
 
-3. **Proof Verification** challenging peers can verify that the returned chunk does in fact hash up to the specified root hash, forming a succint zk-proof that the challenged peer has correct knowledge of the challenge chunk, and is probabilistically storing the whole file.
+2. **Proof Generation**: To respond correctly, the challenged peer must:
+   - Have the actual data stored
+   - Compute the Blake3 hash of the requested chunk
+   - Return this hash as proof of storage
+
+3. **Verification**: The challenger can verify the response by comparing it to the expected hash from the Blake3 Merkle tree.
 
 4. **Trust Building**: Successful responses to challenges increase a peer's trustworthiness. Failed or missing responses decrease trust.
 
@@ -34,9 +48,8 @@ Our challenge mechanism built on Blake3 creates a foundation for trust in a dece
    - At unpredictable intervals to ensure continuous storage
 
 This challenge mechanism takes advantage of Blake3's properties where:
-- It's computationally infeasible to generate a valid proof without having the original data
+- It's computationally infeasible to generate a valid hash without having the original data
 - The Merkle structure allows verification of specific chunks without transferring the entire file
 - The speed of Blake3 makes frequent challenges practical without excessive computational burden
 
 The beauty of this approach is that it creates a verifiable, objective measure of storage contribution that can be used to distribute rewards fairly in a decentralized network.
-
