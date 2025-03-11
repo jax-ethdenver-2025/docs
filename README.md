@@ -36,4 +36,3 @@ This mechanism ensures files remain available without requiring central coordina
 Jax addresses a fundamental challenge in decentralized storage by creating economic incentives that align with file preservation. It enables a marketplace where storage becomes a commodity anyone can provide or purchase, without intermediaries.
 
 The project demonstrates how token economics can create sustainable infrastructure for digital content preservation in a decentralized environment.
-# docs
