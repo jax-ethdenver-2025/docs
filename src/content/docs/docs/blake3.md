@@ -1,4 +1,7 @@
-## Blake3 and its Merkleized Structure
+---
+title: Blake3 Hashing
+description: Our first class hash
+---
 
 Blake3 is a cryptographic hash function designed for high performance while maintaining strong security guarantees. What makes Blake3 particularly useful for distributed systems is its inherent Merkleized structure:
 

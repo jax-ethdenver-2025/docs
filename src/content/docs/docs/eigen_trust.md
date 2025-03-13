@@ -1,6 +1,7 @@
-# EigenTrust-like Paradigm with Blake3: Understanding the Challenge-Proof System
-
-## The EigenTrust Foundation
+---
+title: Eigen Trust
+description: Understanding the role of peer trust
+---
 
 EigenTrust is a reputation algorithm originally designed for peer-to-peer networks to identify trustworthy peers and isolate malicious ones. In the context of decentralized storage with Blake3, this paradigm takes on specialized characteristics:
 

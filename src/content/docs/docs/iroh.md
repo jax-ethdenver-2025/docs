@@ -1,6 +1,7 @@
-# Jax Protocol: Iroh Integration in Decentralized Storage Incentives
-
-## Iroh: The Networking Foundation of Jax
+---
+title: Iroh 
+description: The Networking Foundation of Jax
+---
 
 At the core of Jax's architecture lies Iroh, a sophisticated peer-to-peer networking library that enables our decentralized storage solution. Iroh provides the critical infrastructure that allows Jax to operate as a permissionless file storage network with customizable incentive structures.
 

@@ -1,0 +1,345 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+Add additional Tailwind styles to this file, for example with @layer:
+https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+    
+    /* Starlight overrides */
+    --sl-content-width: 80rem;
+  }
+
+  .dark {
+    --background: 0 0% 0%; /* Pure black */
+    --foreground: 0 0% 100%; /* Pure white */
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 100%;
+  }
+}
+
+body {
+  font-family: monospace;
+}
+
+/* Landing page specific styles */
+.landing-page .site-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Icon styling for database icon */
+.lucide-database {
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+  color: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='12' cy='5' rx='9' ry='3'%3E%3C/ellipse%3E%3Cpath d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3'%3E%3C/path%3E%3Cpath d='M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Starlight theme overrides to match landing page styling */
+:root {
+  --sl-color-bg: #000000;
+  --sl-color-bg-nav: #000000;
+  --sl-color-bg-sidebar: #000000;
+  --sl-color-text: #cbd5e1;
+  --sl-color-text-accent: #ffffff;
+  --sl-color-hairline: #334155;
+  --sl-color-selection-bg: #334155;
+  --sl-color-selection-text: #ffffff;
+  --sl-color-accent: #ffffff;
+  --sl-color-accent-high: #ffffff;
+  --sl-color-accent-low: #1e293b;
+  --sl-font-system-mono: monospace;
+  --sl-font-mono: var(--sl-font-system-mono);
+  --sl-font-system: monospace;
+  --sl-font: var(--sl-font-system);
+  --sl-color-gray-1: #000000;
+  --sl-color-gray-2: #0f172a;
+  --sl-color-gray-3: #1e293b;
+  --sl-color-gray-4: #334155;
+  --sl-color-gray-5: #475569;
+  --sl-color-gray-6: #64748b;
+  --sl-color-gray-7: #94a3b8;
+  --sl-color-gray-8: #cbd5e1;
+  --sl-color-white: #ffffff;
+  --sl-nav-height: 4rem;
+  --sl-nav-pad-x: 1rem;
+  --sl-nav-pad-y: 1.5rem;
+  --sl-mobile-toc-height: 3rem;
+  --sl-sidebar-width: 18rem;
+}
+
+/* "On this page" styling for desktop */
+starlight-toc {
+  background-color: #000000 !important;
+}
+
+starlight-toc h2 {
+  font-family: monospace !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+  margin-bottom: 1rem !important;
+}
+
+starlight-toc nav {
+  padding: 1rem !important;
+}
+
+starlight-toc ul {
+  font-family: monospace !important;
+}
+
+starlight-toc a {
+  color: #cbd5e1 !important;
+  font-family: monospace !important;
+  transition: color 150ms ease !important;
+}
+
+starlight-toc a:hover {
+  color: #ffffff !important;
+}
+
+starlight-toc a[aria-current="true"] {
+  color: #ffffff !important;
+  background-color: #334155 !important;
+}
+
+/* "On this page" styling for mobile */
+mobile-starlight-toc {
+  font-family: monospace !important;
+  background-color: #000000 !important;
+}
+
+#starlight__on-this-page--mobile {
+  font-family: monospace !important;
+  color: #ffffff !important;
+}
+
+mobile-starlight-toc .toggle {
+  color: #cbd5e1 !important;
+}
+
+mobile-starlight-toc .caret {
+  color: #cbd5e1 !important;
+}
+
+mobile-starlight-toc .dropdown {
+  background-color: #000000 !important;
+  border-color: #334155 !important;
+}
+
+mobile-starlight-toc ul.isMobile a {
+  color: #cbd5e1 !important;
+  font-family: monospace !important;
+  transition: color 150ms ease !important;
+}
+
+mobile-starlight-toc ul.isMobile a:hover {
+  color: #ffffff !important;
+}
+
+mobile-starlight-toc ul.isMobile a[aria-current="true"] {
+  color: #ffffff !important;
+  background-color: #334155 !important;
+}
+
+/* Right sidebar panel */
+.right-sidebar {
+  background-color: #000000 !important;
+  border-color: #334155 !important;
+}
+
+/* Main content styling */
+.sl-container {
+  background-color: #000000;
+}
+
+.content-panel {
+  background-color: #000000;
+}
+
+.sl-markdown-content {
+  font-family: monospace !important;
+  color: #cbd5e1 !important;
+}
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.sl-markdown-content h5,
+.sl-markdown-content h6 {
+  font-family: monospace !important;
+  color: #ffffff !important;
+}
+
+.sl-markdown-content a {
+  color: #cbd5e1 !important;
+  transition: color 150ms ease !important;
+}
+
+.sl-markdown-content a:hover {
+  color: #ffffff !important;
+}
+
+.sl-markdown-content code,
+.sl-markdown-content pre {
+  font-family: monospace !important;
+}
+
+/* Navigation sidebar styling */
+.sidebar {
+  background-color: #000000 !important;
+  border-color: #334155 !important;
+}
+
+.sidebar h2 {
+  font-family: monospace !important;
+  color: #ffffff !important;
+}
+
+.sidebar-content {
+  font-family: monospace !important;
+}
+
+.sidebar a {
+  color: #cbd5e1 !important;
+  transition: color 150ms ease !important;
+}
+
+.sidebar a:hover {
+  color: #ffffff !important;
+}
+
+.sidebar a[aria-current="page"] {
+  color: #ffffff !important;
+  background-color: #334155 !important;
+}
+
+/* Header styling */
+.sl-nav {
+  background-color: #000000 !important;
+  border-color: #334155 !important;
+}
+
+.site-title {
+  font-family: monospace !important;
+  font-weight: bold !important;
+  color: #ffffff !important;
+}
+
+.sl-nav a {
+  color: #cbd5e1 !important;
+  transition: color 150ms ease !important;
+}
+
+.sl-nav a:hover {
+  color: #ffffff !important;
+}
+
+/* Make body have black background */
+html, body {
+  background-color: #000000 !important;
+}
+
+/* Ensure no component has white background */
+div, section, article, nav, header, footer, aside {
+  background-color: inherit;
+}
+
+/* Theme toggle styling */
+starlight-theme-select {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.theme-select {
+  display: flex !important;
+  align-items: center !important;
+  border: 1px solid #334155 !important;
+  background-color: transparent !important;
+  border-radius: 0.25rem !important;
+  color: #cbd5e1 !important;
+  font-family: monospace !important;
+  padding: 0.25rem 0.5rem !important;
+  transition: color 150ms ease, border-color 150ms ease !important;
+}
+
+.theme-select:hover {
+  color: #ffffff !important;
+  border-color: #64748b !important;
+}
+
+.theme-select-icon {
+  color: currentColor !important;
+}
+
+/* Dropdown styling */
+.theme-select__options {
+  background-color: #000000 !important;
+  border: 1px solid #334155 !important;
+  border-radius: 0.25rem !important;
+  font-family: monospace !important;
+  min-width: 150px !important;
+}
+
+.theme-select__options button {
+  color: #cbd5e1 !important;
+  background-color: transparent !important;
+  font-family: monospace !important;
+  padding: 0.5rem 1rem !important;
+  text-align: left !important;
+  width: 100% !important;
+  transition: color 150ms ease !important;
+}
+
+.theme-select__options button:hover {
+  color: #ffffff !important;
+  background-color: #334155 !important;
+}
+

@@ -1,0 +1,72 @@
+---
+import { Icon } from "astro-icon/components";
+import "../tailwind.css";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>jax - the permissionlessly incentivized file storage layer for Ethereum</title>
+  <meta name="description" content="jax provides a decentralized storage network where anyone can participate as a storage provider and earn rewards. Built on Ethereum, it ensures your files remain accessible, censorship-resistant, and secure." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="bg-black text-slate-300 font-mono">
+  <div class="flex min-h-screen flex-col">
+    <header class="container mx-auto px-4 py-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <Icon name="lucide:database" class="h-5 w-5 text-white" />
+          <span class="text-xl font-bold text-white">jax</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a
+              href="/docs"
+            class="flex items-center gap-2 text-sm hover:text-white transition-colors"
+          >
+            <Icon name="lucide:book" class="h-4 w-4" />
+            <span>Docs</span>
+          </a>
+          <a
+            href="https://github.com/jax-ethdenver-2025"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 text-sm hover:text-white transition-colors"
+          >
+            <Icon name="lucide:github" class="h-4 w-4" />
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto flex flex-1 flex-col items-center justify-center px-4 text-center">
+      <div class="max-w-2xl space-y-12">
+        <div class="flex flex-col items-center space-y-6">
+          <Icon name="lucide:database" class="h-16 w-16 text-white" />
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-normal leading-tight text-white">
+            the permissionlessly incentivized file storage layer for Ethereum
+          </h1>
+        </div>
+
+        <p class="text-sm sm:text-base leading-relaxed">
+          jax provides a decentralized storage network where anyone can participate as a storage provider and earn
+          rewards. Built on Ethereum, it ensures your files remain accessible, censorship-resistant, and secure.
+        </p>
+      </div>
+    </main>
+
+    <footer class="container mx-auto border-t border-gray-800 px-4 py-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-gray-600">&copy; {new Date().getFullYear()} jax protocol</p>
+        <div class="flex gap-6">
+            <a href="/intro/intro" class="text-xs text-gray-600 hover:text-white transition-colors">
+            Docs
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

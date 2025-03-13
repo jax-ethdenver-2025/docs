@@ -1,4 +1,8 @@
-# System Architecture: Trust Consensus and Reward Distribution
+---
+title: Consensus
+description: Consensus and Reward Distribution
+---
+
 
 ## Distributed Trust Evaluation Framework
 

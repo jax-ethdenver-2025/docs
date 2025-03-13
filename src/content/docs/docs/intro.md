@@ -1,6 +1,7 @@
-# JAX: A Trust-Based Decentralized Storage System
-
-## What JAX Aims to Ensure from Peers
+---
+title: Introduction
+decription: What does jax do?
+---
 
 JAX takes a fundamentally different approach to decentralized storage compared to systems like Filecoin and Arweave. Rather than focusing on cryptographic proofs of storage or complex tokenomics, JAX prioritizes ongoing trust-building through verifiable peer behavior.
 

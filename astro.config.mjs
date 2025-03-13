@@ -1,0 +1,53 @@
+// @ts-check
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+import tailwind from '@astrojs/tailwind';
+import icon from 'astro-icon';
+
+// https://astro.build/config
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'jax docs.',
+			logo: { src: './src/assets/icon.svg' },
+			social: {
+				github: 'https://github.com/jax-ethdenver-2025',
+			},
+			sidebar: [
+				{
+					label: 'Introduction',
+					slug: 'docs/intro'
+				},
+				{
+					label: 'Iroh',
+					slug: 'docs/iroh'
+				},
+				{
+					label: 'Blake3',
+					slug: 'docs/blake3'
+				},
+				{
+					label: 'Eigen Trust',
+					slug: 'docs/eigen_trust'
+				},
+				{
+					label: 'Consensus',
+					slug: 'docs/consensus'
+				}
+			],
+			customCss: ['./src/tailwind.css'],
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en',
+				},
+			},
+		}),
+		tailwind({ applyBaseStyles: false }),
+		icon({
+			include: {
+				lucide: ['database', 'github', 'book'],
+			},
+		}),
+	],
+});
