@@ -6,6 +6,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
+	site: "jax-ethdenver-2025.github.io",
 	integrations: [
 		starlight({
 			title: 'jax docs.',
