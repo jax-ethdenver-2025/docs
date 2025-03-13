@@ -18,23 +18,23 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Introduction',
-					slug: 'docs/intro'
+					slug: 'docs/docs/intro'
 				},
 				{
 					label: 'Iroh',
-					slug: 'docs/iroh'
+					slug: 'docs/docs/iroh'
 				},
 				{
 					label: 'Blake3',
-					slug: 'docs/blake3'
+					slug: 'docs/docs/blake3'
 				},
 				{
 					label: 'Eigen Trust',
-					slug: 'docs/eigen_trust'
+					slug: 'docs/docs/eigen_trust'
 				},
 				{
 					label: 'Consensus',
-					slug: 'docs/consensus'
+					slug: 'docs/docs/consensus'
 				}
 			],
 			customCss: ['./src/tailwind.css'],
