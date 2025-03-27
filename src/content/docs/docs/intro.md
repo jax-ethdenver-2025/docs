@@ -1,9 +1,16 @@
 ---
 title: Introduction
-decription: What does jax do?
 ---
 
-JAX takes a fundamentally different approach to decentralized storage compared to systems like Filecoin and Arweave. Rather than focusing on cryptographic proofs of storage or complex tokenomics, JAX prioritizes ongoing trust-building through verifiable peer behavior.
+Jax is a decentralized storage protocol that aims to:
+- be highly customizable in terms of defining storage incentives
+- allow a variety of storage providers to participate trustlessly without the need for collateral
+- make data availability and retrievals first class citizens within the protocol
+- and allow for truly decentralized data storage across a network of diverse peers, allowing everyone from a data center to a mobile phone to contribute storage, provide files, and earn rewards.
+
+Jax allows for this by being Ethereum native and by using EigenLayer in order
+
+a fundamentally different approach to decentralized storage compared to systems like Filecoin and Arweave. Rather than focusing on cryptographic proofs of storage or complex tokenomics, JAX prioritizes ongoing trust-building through verifiable peer behavior.
 
 ### The Trust-First Approach
 

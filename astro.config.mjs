@@ -21,20 +21,26 @@ export default defineConfig({
 					slug: 'docs/intro'
 				},
 				{
-					label: 'Iroh',
-					slug: 'docs/iroh'
-				},
-				{
-					label: 'Blake3',
-					slug: 'docs/blake3'
-				},
-				{
-					label: 'Eigen Trust',
-					slug: 'docs/eigen_trust'
+					label: 'Storage',
+					items: [
+						{
+							slug: 'docs/storage/iroh'
+						},
+						{
+							slug: 'docs/storage/blake3'
+						},
+					]
 				},
 				{
 					label: 'Consensus',
-					slug: 'docs/consensus'
+					items: [
+						{
+							slug: 'docs/consensus/peer_trust'
+						},
+						{
+							slug: 'docs/consensus/eigen_layer'
+						},
+					]
 				}
 			],
 			customCss: ['./src/tailwind.css'],

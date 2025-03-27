@@ -3,52 +3,44 @@ title: jax
 description: Learn about the jax protocol - the permissionlessly incentivized file storage layer for Ethereum
 ---
 
-import { Icon } from "astro-icon/components";
+jax aims to provide a decentralized storage network where anyone can participate 
+as a storage provider and earn rewards. Built on Ethereum + EigenLayer
+it ensures your files remain accessible, censorship-resistant, and secure.
 
-# jax Documentation
+## Goal Features
 
-jax provides a decentralized storage network where anyone can participate as a storage provider and earn rewards. Built on Ethereum, it ensures your files remain accessible, censorship-resistant, and secure.
+<ul class="space-y-2 mt-4">
+  <li class="flex items-start">
+    <span class="inline-block mr-2 text-white">•</span>
+    <span><strong class="text-white">Decentralized Storage:</strong> Files are chunked and distributed across multiple peers</span>
+  </li>
+  <li class="flex items-start">
+    <span class="inline-block mr-2 text-white">•</span>
+    <span><strong class="text-white">Ethereum Native:</strong> Storage contracts execute on Ethereum</span>
+  </li>
+  <li class="flex items-start">
+    <span class="inline-block mr-2 text-white">•</span>
+    <span><strong class="text-white">Decoupled Incentives:</strong> Consensus is decoupled from the rewards model. Contracts can describe any incentives structure they want.</span>
+  </li>
+  <li class="flex items-start">
+    <span class="inline-block mr-2 text-white">•</span>
+    <span><strong class="text-white">Verifiable Availability:</strong> Jax nodes arrive at consensus over the state of the network and can agree on how to reward storage providers.</span>
+  </li>
+</ul>
+
+Interested in learning more? Let's [jump right in](./docs/intro).
+
+{/*
+
+TODO: re-implement nice cards to onboarding guides
 
 ## Getting Started
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
   <div class="bg-black p-6 rounded-lg border border-gray-800 hover:border-gray-700 transition-colors">
-    <h3 class="text-xl font-bold mb-2 text-white">Store Files</h3>
-    <p class="text-slate-300">Learn how to store and retrieve files using the jax protocol.</p>
-  </div>
-  
-  <div class="bg-black p-6 rounded-lg border border-gray-800 hover:border-gray-700 transition-colors">
-    <h3 class="text-xl font-bold mb-2 text-white">Run a Node</h3>
-    <p class="text-slate-300">Set up your own jax node and participate as a storage provider.</p>
-  </div>
-  
-  <div class="bg-black p-6 rounded-lg border border-gray-800 hover:border-gray-700 transition-colors">
-    <h3 class="text-xl font-bold mb-2 text-white">Architecture</h3>
-    <p class="text-slate-300">Understand how jax works under the hood.</p>
+    <h3 class="text-xl font-bold mb-2 text-white">Example Card</h3>
+    <p class="text-slate-300">Some example text</p>
   </div>
 </div>
+*/}
 
-## Core Features
-
-<ul class="space-y-2 mt-4">
-  <li class="flex items-start">
-    <span class="inline-block mr-2 text-white">•</span>
-    <span><strong class="text-white">Decentralized Storage:</strong> Files distributed across multiple providers</span>
-  </li>
-  <li class="flex items-start">
-    <span class="inline-block mr-2 text-white">•</span>
-    <span><strong class="text-white">Ethereum Integration:</strong> Seamless blockchain integration</span>
-  </li>
-  <li class="flex items-start">
-    <span class="inline-block mr-2 text-white">•</span>
-    <span><strong class="text-white">Economic Incentives:</strong> Fair rewards for storage providers</span>
-  </li>
-  <li class="flex items-start">
-    <span class="inline-block mr-2 text-white">•</span>
-    <span><strong class="text-white">Censorship Resistance:</strong> No central points of failure</span>
-  </li>
-  <li class="flex items-start">
-    <span class="inline-block mr-2 text-white">•</span>
-    <span><strong class="text-white">Verifiable Storage:</strong> Cryptographic proof of storage</span>
-  </li>
-</ul>
