@@ -2,97 +2,92 @@
 title: Introduction
 ---
 
-Jax is a decentralized storage protocol that aims to:
-- be highly customizable in terms of defining storage incentives
-- allow a variety of storage providers to participate trustlessly without the need for collateral
-- make data availability and retrievals first class citizens within the protocol
-- and allow for truly decentralized data storage across a network of diverse peers, allowing everyone from a data center to a mobile phone to contribute storage, provide files, and earn rewards.
+## What is Jax?
 
-Jax allows for this by being Ethereum native and by using EigenLayer in order
+Jax is a decentralized storage protocol that takes a fundamentally different approach to solutions such as Arweave or Filecoin:
+- Jax allows any Ethereum developer to integrate the protocol into their applications and smart contracts without bridging liquidity or fragmenting trust across chains.
+- Incentives are completely decoupled from storage, allowing developers to fully customize their incentive models. No more hand-wavy perma-storage or vanilla bounty-collateral pairs. Layer on as much or as little DeFi as you want to power the distribution of your content.
+- Participating as a storage provider on Jax requires no block building or collateral. Just spin up a node and start earning rewards!
+- Data availability and retrievals are first class citizens of the protocol. No more worrying about whether or not you can get your data back from the network, we got you.
 
-a fundamentally different approach to decentralized storage compared to systems like Filecoin and Arweave. Rather than focusing on cryptographic proofs of storage or complex tokenomics, JAX prioritizes ongoing trust-building through verifiable peer behavior.
+## What does Jax actually *do*?
 
-### The Trust-First Approach
+At its core, Jax is a protocol for arriving at consensus over the behavior of peers in making content-addressed data available to other peers. This consensus is formed through a series of cryptographic challenges of the following form:
 
-At its core, JAX ensures that peers are actively participating in the network in ways that contribute to the availability and retrievability of data. It does this by evaluating peers based on their responses to real-time challenges that verify they're actually storing and serving the files they claim to have.
+- peer `A` wants to gauge whether peer `B` is storing a piece of content-addressed data, `C`.
+- peer `A` queries peer `B` for a zk-proof to that effect. This looks like a succinct merkelized proof of a single chunk of `C`.
+- peer `B` may or may not respond to peer `A` with said proof within some time `T`.
 
-This approach differs significantly from other systems:
+At this point peer `A` can form an attestation to the effect that "`B` can (or cannot) prove to me that they have `C` within some time `T`". Peer `A` then can broadcast its attestation to other peers on the network that can then corroborate or challenge `A`'s assertion by also querying `B`. Note that `B` may or may not be a perfectly responsive peer (they may correctly respond to some peer `A`, but may drop the request of some other peer `A'`). However, over many interactions with `B` the network comes to consensus on whether or not `B` is making `C` available, and can assign a discrete score of `S` representing `B`'s behavior as peer.
 
-1. **Challenge-Response Verification**: JAX constantly tests peers by challenging them to provide Blake3 hashes of specific chunks of content. A peer can only respond correctly if it actually has the data, creating an ongoing verification of storage.
+We can further generalize this attestation across many peers who may be holding `C`. A peer set `A = [a_1, ..., a_n]` can each form local views of another peer set `B = [b_1, ..., b_m]`s aggregate ability to serve back successful responses for challenges over `C`. Members of `A` record their interactions and assign scores for peers in `B` to form a local view of the availability of `C` from peers in `B`. Let's call this set of local scores for a given peer `a`, `S = [s_1, ..., s_m]` and further require that `SUM(S) = 1`.
 
-2. **Reputation Through Behavior**: Unlike systems that rely on staking or upfront commitments, JAX builds trust profiles of peers based on their actual behavior over time. A peer's reputation emerges from consistent, verifiable actions rather than economic commitments.
+Peers in `A` then share their local views along with relevant records to other peers in `A`. Peers in `A` may then update their local scores in response, and further propagate their updated local scores to other peers in `A`. `A` eventually comes to consensus on a set of global scores `S_g` that represents an aggregated account of how well each peer in `B` is making `C` available to other peers.
 
-3. **Availability as a First-Class Concern**: JAX directly measures and rewards data availability through its challenge system. This ensures that data isn't just being stored but is actually retrievable when needed.
+Fundamentally, Jax works by implementing the process just described, and generates statements of the following form:
 
-4. **Dynamic Trust Calculation**: Using an EigenTrust-like algorithm, JAX aggregates peer assessments into global reputation scores that determine reward distribution. This creates a system where economic incentives directly align with beneficial network behavior.
+```
+Within some window of time E, 
+A has come to consensus over B's aggregate
+ability to make C available, and can agree on a
+discrete peer score s_b for each b in B
+```
 
-### What JAX Doesn't Do (By Design)
+## Great ... so what?
 
-JAX deliberately avoids certain mechanisms common in other decentralized storage solutions:
+The usefulness of the above statement is that it provides a trustless method of describing distributions from some treasury `T` that is meant to incentivize the availability of some piece of content `C`. That is, anyone can set up an arbitrary incentive structure to make some piece of content `C` available across an untrusted set of peers `B`, and Jax handles all the consensus and validation required to confirm that peers in `B` are actually serving `C` to the network, and provides a basis for peers in `B` to be rewarded for doing so. This pattern encourages peers to actively participate in the network in ways that contribute to the availability and retrievability of data. 
 
-1. **No Proof of Replication**: Unlike Filecoin, JAX doesn't use cryptographic proofs to verify that multiple unique copies of data exist. This means JAX doesn't have a cryptographic guarantee against peers colluding to store a single copy while claiming multiple storage rewards.
+While a seemingly obscure concern, this actually has a number of interesting benefits when it comes to defining a decentralized storage protocol.
 
-2. **No Complex Tokenomics for Permanence**: Unlike Arweave, JAX doesn't rely on elaborate token economics to incentivize long-term storage. There's no endowment model or token burning mechanism trying to ensure "permanent" storage.
+### Reputation and Stakeless Storage
 
-3. **No Heavy Staking Requirements**: JAX doesn't require peers to lock up large amounts of capital to participate. This dramatically lowers the barrier to entry for new storage providers.
+**Reputation Through Behavior**: Jax builds trust profiles of peers based on their actual behavior over time. A peer's reputation emerges from consistent, verifiable actions rather than economic commitments.
 
-### What JAX Does Incentivize
+**Stakeless Participation**: Peers are rewarded on the basis of their demonstrated ability to make data availability over time, without any long term commitments or lock-in on their part. There is no binary slashing condition for storage that would make staking make sense -- if you don't serve files, you just don't earn rewards. 
 
-JAX rewards peers for demonstrating trustworthy behavior through:
+**Diverse Peer Sets**: Because there's no staking and no slashing mechanism for storage providers, there are basically no capital costs associated with providing storage space to the network and earning rewards. This means that pretty much anyone can run Jax without having to worry about up-front investment, up-time of their node, or other mundane concerns usually associated with participating in DePIn protocols. This allows the network to actually take advantage of the full-breadth of available storage space on any device, taking decentralized storage out of the data center and on to your mobile device.
 
-1. **Consistent Challenge Responses**: Peers who reliably respond to storage challenges build trust scores that translate directly into rewards.
+### Availability 
 
-2. **Network Participation**: Active participation in the challenge-verification process itself (both issuing challenges and responding to them) helps establish a peer's reputation.
+**Availability as a First-Class Concern**: Jax directly measures and rewards data availability through its challenge system. This ensures that data isn't just being stored but is actually retrievable when needed.
 
-3. **Verifiable Availability**: The ability to consistently serve data when challenged directly impacts a peer's earning potential.
+**Verifiable Availability**: The global trust scores arrived at by Jax for a piece of content are also verifiable through auditing the records of interactions that peers report.
 
-## What This Approach Enables
+**No Secondary Market for Retrieval**: There's no need for a separate retrieval market because availability is built into the primary incentive structure. If you do not serve files as a storage provider, your rewards will be impacted.
 
-This trust-based paradigm creates several unique capabilities:
+### Your data, your incentives
 
-### Decoupling Rewards from Storage Parameters
+**No more bounty hunting**: Storage contracts in Jax describe treasuries which are claimable by peers based on their demonstrated performance. You don't need to establish direct relationships with storage providers, commit to a set term, or lock up capital in order to make your files available on the network. If you create the right incentives, your data will propagate.
 
-Storage contracts in JAX can set bounties based on their specific needs without having to establish direct relationships with storage providers. This creates a more fluid marketplace where:
+**Decoupled incentives**: Treasuries are just solidity contracts that can define their own:
+- distribution schedules
+- minimum service requirements
+- payment tokens
+- funding models
+- etc.
 
-1. **Flexible Incentive Structures**: Different files can have different reward structures based on their importance, size, or other parameters.
+Feel free to make your incentives as simple or complex as you want. If it can be described as a reward distribution, it can be deployed on Jax. Extend your treasuries to act as NFTs, minable tokens, or whatever else you can think of.
 
-2. **Market-Driven Storage Allocation**: Resources naturally flow toward storing the most valued content.
+**Market-Driven Storage Allocation**: Resources naturally flow toward storing the most valued content. The network balances itself due to peers chasing down treasuries which align with their interests. Are there too few storage peers serving your content given the incentives in your treasury? Other peers will join the peer set and enhance availability. Are rewards too scant for a given treasury given the size of the peer set? Peers will leave in search of new opportunities.
 
-3. **Permissionless Participation**: Any peer can join and start earning by storing high-value content without needing approval from existing participants.
 
-### Availability as a Core Metric
+**Permissionless Participation**: Feel like crowd-sourcing funds for your content? Make your treasury payable and allow any individual or DAO to participate in providing resources.
 
-Unlike systems where miners can earn by merely proving they have allocated sectors (without necessarily serving the data), JAX makes actual availability a prerequisite for earning rewards:
+**You can do all of this, and more, with Jax**
 
-1. **Retrieval is First-Class**: The challenge mechanism directly verifies that content can be retrieved, not just that space has been allocated.
+## What Jax Doesn't Do (By Design)
 
-2. **No Secondary Market Needed**: There's no need for a separate retrieval market because availability is built into the primary incentive structure.
+Jax deliberately avoids certain mechanisms common in other decentralized storage solutions:
 
-3. **User-Centric Design**: This approach aligns incentives with what users actually care about—being able to access their data when needed.
+1. **No Proof of Replication**: Unlike Filecoin, Jax doesn't use cryptographic proofs to verify that multiple unique copies of data exist. 
 
-### Stakeless Participation with Bounded Risk
+2. **No Complex Tokenomics for Permanence**: Unlike Arweave, Jax doesn't rely on elaborate token economics to incentivize long-term storage. There's no endowment model or token burning mechanism trying to ensure "permanent" storage.
 
-JAX creates an environment where:
+Jax does one thing and it does it well: it provides developers the ability to build highly customizable incentivize structures for availability on top of its core consensus mechanisms.
 
-1. **Low Capital Requirements**: Peers can join and start earning without significant upfront investment.
+## Concluding thoughts
 
-2. **Limited Downside**: Since slashing is constrained to reputation within the network consensus rather than direct financial penalties, the risks of participation are bounded.
-
-3. **Merit-Based Earnings**: Rewards are tied to actual service quality rather than stake size, creating a more equitable system.
-
-### On-Chain Consensus of Data Availability
-
-Perhaps most importantly, JAX creates a mechanism to:
-
-1. **Bring Off-Chain Storage Status On-Chain**: The trust scores generated through the challenge-response system become a consensus view of file availability that can be used by smart contracts.
-
-2. **Enable Conditional Logic Based on Availability**: Smart contracts can make decisions based on whether specific content is available in the network.
-
-3. **Create Semantic Meaning for Hashes**: A content hash in JAX isn't just an identifier; it's associated with a dynamic trust score that indicates its current availability in the network.
-
-## The Core Innovation
-
-The fundamental insight of JAX is that you don't need complex cryptographic proofs or elaborate tokenomics to create effective decentralized storage. By directly measuring and rewarding the behaviors that make storage useful—actual availability and retrievability—JAX creates a system where economic incentives naturally align with user needs.
+The fundamental insight of Jax is that you don't need complex weighty cryptographic primitives, staking, or mining in order to create effective decentralized storage. By directly measuring and rewarding the behaviors that make storage useful -- actual availability and retrievability -- Jax creates a system where economic incentives naturally align with user needs.
 
 This trust-based approach creates a more accessible, flexible system where:
 - Storage providers are evaluated on what matters most: making data available
@@ -100,4 +95,5 @@ This trust-based approach creates a more accessible, flexible system where:
 - The network naturally adapts to prioritize the most valued content
 - Participation is open to anyone with storage capacity, regardless of capital resources
 
-Through this mechanism, JAX builds a bridge between off-chain storage reality and on-chain consensus, creating a powerful new primitive for decentralized applications that need reliable access to data.
+Through this mechanism, Jax builds a bridge between off-chain storage reality and on-chain consensus, creating a powerful new primitive for decentralized applications that need reliable access to data.
+
